@@ -6,6 +6,10 @@ on:
             - '**/TestView.swift'
             - '**/Test2View.swift'
             - '**/Test3View.swift'
+
+permissions:
+  contents: read
+  pull-requests: write
     
 jobs:
     comment-on-pull-request:
@@ -29,5 +33,5 @@ jobs:
                   issue_number: context.issue.number,
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  body: `hのファイルが編集されました。`
+                  body: `Pendoのファイルが編集されました。`
                 })
