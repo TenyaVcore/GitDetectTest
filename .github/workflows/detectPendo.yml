@@ -32,10 +32,14 @@ jobs:
           script: |
             const diffFiles = '${{ steps.diff-check.outputs['diff-files'] }}';
             const files = diffFiles.split('\n').filter(file => file.trim() !== '');
+            const trackedFilesArray = [
+              'TestView.swift',
+              'Test2View.swift',
+              'Test3View.swift'
+            ];
+
             const trackedFiles = files.filter(file => 
-              file.endsWith('TestView.swift') || 
-              file.endsWith('Test2View.swift') || 
-              file.endsWith('Test3View.swift')
+              trackedFilesArray.some(trackedFile => file.endsWith(trackedFile))
             );
             
             if (trackedFiles.length > 0) {
