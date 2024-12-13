@@ -17,12 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 100
+          fetch-depth: 300
           ref: ${{ github.head_ref }}
       - id: diff-check
         if: github.event.action == 'synchronize'
         run: |
-          diff_files=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only)
+          diff_files=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge)
           echo "diff-files=$diff_files" >> $GITHUB_OUTPUT
       - id: no-diff-check
         if: github.event.action != 'synchronize'
@@ -32,7 +32,7 @@ jobs:
         with:
           script: |
             const files = steps.diff-check.outputs['diff-files'].split('\n');
-            const changedFiles = files.filter(file => file); // Remove empty lines
+            const changedFiles = files.filter(file => file.trim() !== ''); // Remove empty lines
             if (changedFiles.length > 0) {
               const body = `Pendoのファイルが編集されました:\n- ${changedFiles.join('\n- ')}`;
               github.rest.issues.createComment({
