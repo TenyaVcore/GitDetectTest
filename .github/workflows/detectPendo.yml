@@ -2,10 +2,6 @@ name: detectPendo
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    paths:
-      - "**/TestView.swift"
-      - "**/Test2View.swift"
-      - "**/Test3View.swift"
 
 permissions:
   contents: read
@@ -27,10 +23,16 @@ jobs:
         if: steps.diff-check.outputs.diff-files
         with:
           script: |
-            const files = '${{steps.diff-check.outputs['diff-files']}}'.split('\n');
-            const changedFiles = files.filter(file => file.trim() !== '');
-            if (changedFiles.length > 0) {
-              const body = `Pendoのファイルが編集されました:\n- ${changedFiles.join('\n- ')}`;
+            const diffFiles = '${{ steps.diff-check.outputs['diff-files'] }}';
+            const files = diffFiles.split('\n').filter(file => file.trim() !== '');
+            const trackedFiles = files.filter(file => 
+              file.endsWith('TestView.swift') || 
+              file.endsWith('Test2View.swift') || 
+              file.endsWith('Test3View.swift')
+            );
+            
+            if (trackedFiles.length > 0) {
+              const body = `以下のPendo関連ファイルが編集されました:\n- ${trackedFiles.join('\n- ')}`;
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
