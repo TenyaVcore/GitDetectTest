@@ -1,5 +1,5 @@
 //
-//  TestView.swift
+//  Test3View.swift
 //  GitDetectTest
 //
 //  Created by cw-nobuya.tagawa on 2024/12/13.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-struct TestView: View {
+struct Test3View: View {
     var body: some View {
-        Text("Test Test Test")
+        Text("Test3")
     }
 }
 
 #Preview {
-    TestView()
+    Test3View()
 }
