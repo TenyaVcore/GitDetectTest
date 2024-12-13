@@ -20,13 +20,9 @@ jobs:
           fetch-depth: 100
           ref: ${{ github.head_ref }}
       - id: diff-check
-        if: github.event.action == 'synchronize'
         run: |
           diff_files=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only)
           echo "diff-files=$diff_files" >> $GITHUB_OUTPUT
-      - id: no-diff-check
-        if: github.event.action != 'synchronize'
-        run: echo "diff-files=" >> $GITHUB_OUTPUT
       - uses: actions/github-script@v6
         if: steps.diff-check.outputs.diff-files
         with:
