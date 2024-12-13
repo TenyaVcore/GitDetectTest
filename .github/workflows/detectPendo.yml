@@ -31,7 +31,7 @@ jobs:
         if: steps.diff-check.outputs.diff-files
         with:
           script: |
-            const files = '${{steps.diff-check.outputs['diff-files']}}''.split('\n');
+            const files = '${{steps.diff-check.outputs['diff-files']}}'.split('\n');
             const changedFiles = files.filter(file => file.trim() !== '');
             if (changedFiles.length > 0) {
               const body = `Pendoのファイルが編集されました:\n- ${changedFiles.join('\n- ')}`;
