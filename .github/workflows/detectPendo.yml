@@ -1,16 +1,16 @@
 name: detectPendo
-on: 
+on:
   pull_request:
-    types: [ opened, synchronize, reopened ]
+    types: [opened, synchronize, reopened]
     paths:
-      - '**/TestView.swift'
-      - '**/Test2View.swift'
-      - '**/Test3View.swift'
+      - "**/TestView.swift"
+      - "**/Test2View.swift"
+      - "**/Test3View.swift"
 
 permissions:
   contents: read
   pull-requests: write
-    
+
 jobs:
   comment-on-pull-request:
     runs-on: ubuntu-latest
