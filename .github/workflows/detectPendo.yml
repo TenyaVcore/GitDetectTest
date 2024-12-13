@@ -18,7 +18,7 @@ jobs:
         run: |
           if [[ "${{ github.event.action }}" == "opened" ]]; then
             # 初回のPR作成時はベースブランチとの差分を取得
-            base_branch=$(git merge-base HEAD origin/${{ github.event.pull_request.base.ref }})
+            base_branch=$(git merge-base HEAD ${{ github.event.pull_request.base.ref }})
             diff_files=$(git diff $base_branch HEAD --name-only)
           else
             # それ以外の場合はイベントの差分を取得
