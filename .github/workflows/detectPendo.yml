@@ -2,39 +2,41 @@ name: detectPendo
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    paths:
-      - 'TestView.swift'
-      - 'Test2View.swift'
+
+permissions:
+  contents: read
+  pull-requests: write
 
 jobs:
-  comment-on-pr:
+  comment-on-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v44
+          fetch-depth: 100
+          ref: ${{ github.head_ref }}
+      - id: diff-check
+        run: |
+          diff_files=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only)
+          echo "diff-files=$diff_files" >> $GITHUB_OUTPUT
+      - uses: actions/github-script@v6
+        if: steps.diff-check.outputs.diff-files
         with:
-          files: |
-            TestView.swift
-            Test2View.swift
-
-      - name: Create PR comment
-        uses: actions/github-script@v7
-        if: steps.changed-files.outputs.any_changed == 'true'
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const changedFiles = JSON.parse('${{ steps.changed-files.outputs.all_changed_files }}')
-            const commentBody = changedFiles.map(file => `Changed file: \`${file}\``).join('\n')
+            const diffFiles = '${{ steps.diff-check.outputs['diff-files'] }}';
+            const files = diffFiles.split('\n').filter(file => file.trim() !== '');
+            const trackedFiles = files.filter(file => 
+              file.endsWith('TestView.swift') || 
+              file.endsWith('Test2View.swift') || 
+              file.endsWith('Test3View.swift')
+            );
             
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: commentBody
-            })
+            if (trackedFiles.length > 0) {
+              const body = `以下のPendo関連ファイルが編集されました:\n- ${trackedFiles.join('\n- ')}`;
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body
+              });
+            }
