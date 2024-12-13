@@ -14,6 +14,7 @@
 		57947F972D0BCB3D0012C5E5 /* GitDetectTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57947F962D0BCB3D0012C5E5 /* GitDetectTestTests.swift */; };
 		57947FA12D0BCB3D0012C5E5 /* GitDetectTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57947FA02D0BCB3D0012C5E5 /* GitDetectTestUITests.swift */; };
 		57947FA32D0BCB3D0012C5E5 /* GitDetectTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57947FA22D0BCB3D0012C5E5 /* GitDetectTestUITestsLaunchTests.swift */; };
+		57947FB02D0BCD8F0012C5E5 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57947FAF2D0BCD8F0012C5E5 /* TestView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		57947F9C2D0BCB3D0012C5E5 /* GitDetectTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GitDetectTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		57947FA02D0BCB3D0012C5E5 /* GitDetectTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitDetectTestUITests.swift; sourceTree = "<group>"; };
 		57947FA22D0BCB3D0012C5E5 /* GitDetectTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitDetectTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		57947FAF2D0BCD8F0012C5E5 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				57947F852D0BCB3B0012C5E5 /* GitDetectTestApp.swift */,
 				57947F872D0BCB3B0012C5E5 /* ContentView.swift */,
+				57947FAF2D0BCD8F0012C5E5 /* TestView.swift */,
 				57947F892D0BCB3C0012C5E5 /* Assets.xcassets */,
 				57947F8B2D0BCB3D0012C5E5 /* Preview Content */,
 			);
@@ -257,6 +260,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57947FB02D0BCD8F0012C5E5 /* TestView.swift in Sources */,
 				57947F882D0BCB3B0012C5E5 /* ContentView.swift in Sources */,
 				57947F862D0BCB3B0012C5E5 /* GitDetectTestApp.swift in Sources */,
 			);
