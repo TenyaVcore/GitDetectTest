@@ -22,7 +22,7 @@ jobs:
       - id: diff-check
         if: github.event.action == 'synchronize'
         run: |
-          diff_files=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only --relative=hoge)
+          diff_files=$(git diff ${{ github.event.before }} ${{ github.event.after }} --name-only)
           echo "diff-files=$diff_files" >> $GITHUB_OUTPUT
       - id: no-diff-check
         if: github.event.action != 'synchronize'
