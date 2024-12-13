@@ -1,6 +1,7 @@
 name: detectPendo
 on:
   pull_request:
+    types: [opened, synchronize, reopened]
     paths:
       - 'TestView.swift'
       - 'Test2View.swift'
